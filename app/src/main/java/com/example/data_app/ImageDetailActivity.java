@@ -47,7 +47,7 @@ public class ImageDetailActivity extends AppCompatActivity {
     }
 
     private void deleteImage() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get current user ID
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userImagesRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Images");
 
         userImagesRef.child(imageName).removeValue().addOnCompleteListener(task -> {
