@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,7 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class ImageDetailActivity extends AppCompatActivity {
+public class ImageDeleteActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView imageNameTextView;
     private Button deleteButton;
@@ -52,10 +51,8 @@ public class ImageDetailActivity extends AppCompatActivity {
 
         userImagesRef.child(imageName).removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(ImageDetailActivity.this, "Image deleted successfully.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImageDeleteActivity.this, "Image deleted successfully", Toast.LENGTH_SHORT).show();
                 finish();
-            } else {
-                Toast.makeText(ImageDetailActivity.this, "Failed to delete image.", Toast.LENGTH_SHORT).show();
             }
         });
 

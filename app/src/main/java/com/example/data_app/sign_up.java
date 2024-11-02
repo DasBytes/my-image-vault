@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class sign_up extends AppCompatActivity {
-    TextInputEditText etRegName;
-    TextInputEditText etRegemail;
-    TextInputEditText etRegpassword;
+    EditText etRegName;
+    EditText etRegemail;
+    EditText etRegpassword;
     TextView tvloginhere;
     Button btnregister;
     FirebaseAuth mAuth;
@@ -99,24 +100,24 @@ public class sign_up extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> verificationTask) {
                                             if (verificationTask.isSuccessful()) {
                                                 Toast.makeText(sign_up.this,
-                                                        "Registration successful. Please check your email for verification.",
+                                                        "Registration successful. Please check your email for verification",
                                                         Toast.LENGTH_LONG).show();
                                                 startActivity(new Intent(sign_up.this, login.class));
                                                 finish();
                                             } else {
                                                 Toast.makeText(sign_up.this,
-                                                        "Failed to send verification email: " + verificationTask.getException().getMessage(),
+                                                        "Failed to send verification email " + verificationTask.getException().getMessage(),
                                                         Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                                 } else {
-                                    Toast.makeText(sign_up.this, "Failed to save user data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(sign_up.this, "Failed to save user data " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                     } else {
-                        Toast.makeText(sign_up.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(sign_up.this, "Registration Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

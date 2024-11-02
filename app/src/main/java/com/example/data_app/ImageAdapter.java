@@ -38,7 +38,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Picasso.get().load(imageData.getImageUrl()).into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ImageDetailActivity.class);
+            Intent intent = new Intent(context, ImageDeleteActivity.class);
             intent.putExtra("imageUrl", imageData.getImageUrl());
             intent.putExtra("imageName", imageData.getImageName());
             context.startActivity(intent);

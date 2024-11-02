@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class login extends AppCompatActivity {
-    TextInputEditText etloginEmail;
-    TextInputEditText etloginPassword;
+    EditText etloginEmail;
+    EditText etloginPassword;
     TextView tvRegisterHere, tvForgotPassword;
     Button btnlogin;
     FirebaseAuth mAuth;
@@ -78,15 +80,22 @@ public class login extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(login.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(login.this, MainActivity.class));
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null && user.isEmailVerified()) {
+                            Toast.makeText(login.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(login.this, MainActivity.class));
+                        } else {
+                            Toast.makeText(login.this, "Please verify your email before logging in", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
+                        }
                     } else {
-                        Toast.makeText(login.this, "Log in Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(login.this, "Log in Error " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
+
 
     private void showForgotPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -107,7 +116,7 @@ public class login extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(login.this, "Password reset email sent. Check your inbox.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(login.this, "Password reset email sent ", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(login.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }

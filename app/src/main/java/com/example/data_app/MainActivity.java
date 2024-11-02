@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity {
                     });
                 } else {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(MainActivity.this, "Upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Upload failed " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
-            Toast.makeText(this, "Select an image and enter a name.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Select an image and enter a name", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         userImagesRef.child(imageName).setValue(downloadUrl).addOnCompleteListener(task -> {
             progressBar.setVisibility(View.GONE);
             if (task.isSuccessful()) {
-                Toast.makeText(MainActivity.this, "Image uploaded successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Image uploaded successfully", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(MainActivity.this, "Failed to save image: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Failed to save image " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

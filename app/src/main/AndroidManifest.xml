@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Data_app"
         tools:targetApi="31">
         <activity
-            android:name=".ImageDetailActivity"
+            android:name=".ImageDeleteActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
