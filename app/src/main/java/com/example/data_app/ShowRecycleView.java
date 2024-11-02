@@ -32,9 +32,9 @@ public class ShowRecycleView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_image);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -43,22 +43,22 @@ public class ShowRecycleView extends AppCompatActivity {
         imageAdapter = new ImageAdapter(imageList, this);
         recyclerView.setAdapter(imageAdapter);
 
-        // Initialize Firebase user reference for the logged-in user's images
+
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         userImagesRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Images");
 
-        loadImages(); // Load images specific to the user
+        loadImages();
 
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+
+
     }
 
     private void loadImages() {
-        // Fetch images from the specific user's node
+
         userImagesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                imageList.clear(); // Clear the list before adding new items
+                imageList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String imageName = snapshot.getKey();
                     String imageUrl = snapshot.getValue(String.class);

@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class sign_up extends AppCompatActivity {
-    TextInputEditText etRegName; // Added for user name
+    TextInputEditText etRegName;
     TextInputEditText etRegemail;
     TextInputEditText etRegpassword;
     TextView tvloginhere;
@@ -35,15 +35,15 @@ public class sign_up extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        etRegName = findViewById(R.id.username); // Initialize name input
+        etRegName = findViewById(R.id.username);
         etRegemail = findViewById(R.id.email);
         etRegpassword = findViewById(R.id.password);
         tvloginhere = findViewById(R.id.log_in_page);
         btnregister = findViewById(R.id.register_button);
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users"); // Reference to Users node
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
-        // Register button click listener
+
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +51,6 @@ public class sign_up extends AppCompatActivity {
             }
         });
 
-        // Navigate to login activity
         tvloginhere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,11 +60,11 @@ public class sign_up extends AppCompatActivity {
     }
 
     private void createuser() {
-        String name = etRegName.getText().toString(); // Get user name
+        String name = etRegName.getText().toString();
         String email = etRegemail.getText().toString();
         String password = etRegpassword.getText().toString();
 
-        // Validate name, email, and password
+
         if (TextUtils.isEmpty(name)) {
             etRegName.setError("Name cannot be empty");
             etRegName.requestFocus();
@@ -79,22 +78,22 @@ public class sign_up extends AppCompatActivity {
             etRegpassword.setError("Password must be at least 6 characters long");
             etRegpassword.requestFocus();
         } else {
-            // Create user with email and password
+
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        // Save user data to Realtime Database
-                        String userId = mAuth.getCurrentUser().getUid(); // Get user ID
+
+                        String userId = mAuth.getCurrentUser().getUid();
                         Map<String, String> userMap = new HashMap<>();
-                        userMap.put("name", name); // Save name
-                        userMap.put("email", email); // Save email
+                        userMap.put("name", name);
+                        userMap.put("email", email);
 
                         databaseReference.child(userId).setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    // Send verification email
+
                                     mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> verificationTask) {

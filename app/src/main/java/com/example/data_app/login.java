@@ -38,7 +38,7 @@ public class login extends AppCompatActivity {
         btnlogin = findViewById(R.id.sign_in_button);
         mAuth = FirebaseAuth.getInstance();
 
-        // Register button to open sign-up activity
+
         tvRegisterHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class login extends AppCompatActivity {
             }
         });
 
-        // Forgot Password - show a dialog to reset password
+
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,11 +54,11 @@ public class login extends AppCompatActivity {
             }
         });
 
-        // Set OnClickListener for login button to call loginUser
+
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(); // Call loginUser method when button is clicked
+                loginUser();
             }
         });
     }
