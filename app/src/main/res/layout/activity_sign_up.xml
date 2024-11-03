@@ -10,6 +10,15 @@
     android:background="@drawable/img25"
     tools:context=".sign_up">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an account"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" />
 
     <EditText
         android:id="@+id/username"
