@@ -53,5 +53,5 @@ My Image Vault is a secure Android application built with **Java** that allows u
 ## 📬 Contact
 
 <p align="center">
-  <a href="https://github.com/DasBytes">GitHub</a> •
+  <a href="https://github.com/DasBytes">[GitHub](https://github.com/DasBytes)</a>
 </p>
